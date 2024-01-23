@@ -4,7 +4,7 @@ import fs from 'node:fs';
 function createMazes(mazeCount, mazeWidth, mazeHeight) {
     const mazes = {};
 
-    for (let i = 1; i <= mazeWidth; i++) {
+    for (let i = 1; i <= mazeCount; i++) {
         mazes[i] = mazeGeneration({
             width: mazeWidth,
             height: mazeHeight,
@@ -15,11 +15,12 @@ function createMazes(mazeCount, mazeWidth, mazeHeight) {
     return mazes;
 }
 
-function writeMazesJSON(mazes) {
+function writeMazesObject(mazes) {
     const mazesJSON = JSON.stringify(mazes);
+    const data = `export default ${mazesJSON}`;
 
-    fs.writeFileSync('src/data/mazes.json', mazesJSON);
+    fs.writeFileSync('src/data/mazes.js', mazesObject);
 }
 
 const mazes = createMazes(20, 20, 30);
-writeMazesJSON(mazes);
+writeMazesObject(mazes);
