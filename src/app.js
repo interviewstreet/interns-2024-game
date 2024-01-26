@@ -1,6 +1,6 @@
 import Maze from "./elements/Maze.js";
+import { kbm } from "./config/kaboom.js";
 
-const maze = new Maze();
-console.log(maze.pattern.join("\n"));
-
-document.write("ON THE WAY");
+(function initiateGame() {
+    
+}());

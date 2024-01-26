@@ -22,7 +22,5 @@ export default class Maze {
 
         this.pattern[1] = this.pattern[1].replace("|", " ");
         this.pattern[patternHeight - 1] = this.pattern[patternHeight - 1].substring(0, patternWidth) + "  ";
-
-        Maze.sayHello()
     }
 }

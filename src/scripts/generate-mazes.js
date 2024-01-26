@@ -1,5 +1,4 @@
 import mazeGeneration from 'maze-generation';
-import fs from 'node:fs';
 
 function createMazes(mazeCount, mazeWidth, mazeHeight) {
     const mazes = {
