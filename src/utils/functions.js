@@ -2,7 +2,7 @@ import constants from "./constants.js";
 
 function responsiveFactor() {
     if (constants.width >= 1440) {
-        return 1;
+        return .9;
     } else if (constants.width > 1280) {
         return .8;
     } else if (constants.width > 960) {

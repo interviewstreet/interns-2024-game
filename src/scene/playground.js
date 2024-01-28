@@ -19,12 +19,31 @@ function setBackground() {
 }
 
 function addSpaceship() {
-    kbm.add([
+    const spaceship = kbm.add([
         kbm.sprite("spaceship"),
-        kbm.pos(constants.width / 2, constants.height - resources.spaceship.height),
+        kbm.pos(constants.width / 2, constants.height - resources.spaceship.height * utils.responsiveFactor()),
         kbm.anchor("center"),
-        kbm.scale(1 * utils.responsiveFactor())
+        kbm.scale(1 * utils.responsiveFactor()),
+        kbm.area()
     ]);
+
+    kbm.onKeyDown("left", () => {
+        spaceship.move(-200, 0);
+    });
+
+    kbm.onKeyDown("right", () => {
+        spaceship.move(200, 0);
+    });
+
+    kbm.onMouseDown(() => {
+        const mouseXCoord = kbm.mousePos().x;
+
+        if (mouseXCoord < constants.width / 2) {
+            spaceship.move(-200, 0);
+        } else {
+            spaceship.move(200, 0);
+        }
+    });
 }
 
 export default function playground() {
