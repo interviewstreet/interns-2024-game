@@ -1,12 +1,11 @@
 import { kbm, resources, constants } from "./../config/kaboom.js";
-import Maze from "./../elements/Maze.js";
 
 function setBackground() {
     kbm.add([
-        kbm.sprite("background"),
+        kbm.sprite("background-desktop-blue"),
         kbm.pos(kbm.center()),
         kbm.anchor("center"),
-        kbm.scale(constants.width / resources.background.width)
+        kbm.scale(constants.width / resources.backgroundDesktopBlue.width)
     ]);
 }
 
