@@ -1,4 +1,4 @@
-import { kbm } from "./config/kaboom.js";
+import kbm from "./config/kaboom.js";
 import playground from "./scene/playground.js";
 
 function loadGameScenes() {
