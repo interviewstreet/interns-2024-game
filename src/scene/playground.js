@@ -36,7 +36,7 @@ function addAsteroids() {
 function handleCollision() {
     kbm.onCollide("spaceship", "asteroid", (s, a, collision) => {
         kbm.shake();
-        a.destroy();
+        Asteroid.explode(a);
     });
 }
 

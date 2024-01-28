@@ -41,6 +41,18 @@ const resources = {
             { element: kbm.loadSprite('asteroid11', '../assets/sprites/asteroid11.png') },
             { element: kbm.loadSprite('asteroid12', '../assets/sprites/asteroid12.png') }
         ]
+    },
+    explosion: {
+        images: [
+            { element: kbm.loadSprite('explosion1', '../assets/sprites/explosion1.png') },
+            { element: kbm.loadSprite('explosion2', '../assets/sprites/explosion2.png') },
+            { element: kbm.loadSprite('explosion3', '../assets/sprites/explosion3.png') },
+            { element: kbm.loadSprite('explosion4', '../assets/sprites/explosion4.png') },
+            { element: kbm.loadSprite('explosion5', '../assets/sprites/explosion5.png') },
+            { element: kbm.loadSprite('explosion6', '../assets/sprites/explosion6.png') },
+            { element: kbm.loadSprite('explosion7', '../assets/sprites/explosion7.png') },
+            { element: kbm.loadSprite('explosion8', '../assets/sprites/explosion8.png') }
+        ]
     }
 };
 

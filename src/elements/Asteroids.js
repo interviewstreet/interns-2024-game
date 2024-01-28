@@ -9,7 +9,6 @@ class Asteroid {
         const randomXCoord = Math.random() * constants.width;
 
         if (randomAsteroidScale < 0.4) randomAsteroidScale += 0.5;
-        console.log(randomAsteroidScale);
 
         this.element = kbm.add([
             kbm.sprite(`asteroid${randomAsteroidId}`),
@@ -29,6 +28,23 @@ class Asteroid {
         kbm.loop(0.04, () => {
             this.element.angle += 5;
         });
+    }
+
+    static explode(asteroid) {
+        let explosionImageCount = 1;
+        const maxExplosionImage = resources.explosion.images.length;
+        
+        const timer = setInterval(() => {
+            if (explosionImageCount == 1) asteroid.scaleTo(asteroid.scale.x + .5, asteroid.scale.y + .5);
+            
+            asteroid.use(kbm.sprite(`explosion${explosionImageCount}`));
+            explosionImageCount++;
+
+            if (maxExplosionImage === explosionImageCount) {
+                asteroid.destroy();
+                clearTimeout(timer);
+            }
+        }, 100);
     }
 }
 
