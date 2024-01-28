@@ -13,8 +13,8 @@ class Spaceship {
             kbm.scale(this.scaleFactor * utils.responsiveFactor()),
             kbm.area()
         ]);
-        this.leftBound = (this.element.width * utils.responsiveFactor()) / 2;
-        this.rightBound = constants.width - ((this.element.width * utils.responsiveFactor()) / 2);
+        this.leftBound = (resources.spaceship.width * utils.responsiveFactor()) / 2;
+        this.rightBound = constants.width - ((resources.spaceship.width * utils.responsiveFactor()) / 2);
     }
 
     registerControls() {
@@ -33,14 +33,13 @@ class Spaceship {
         switch (direction) {
             case 'LEFT':
                 if (this.leftBound < this.element.pos.x) {
-                    this.element.move(-200, 0);
+                    this.element.move(-250, 0);
                 }
             break;
             case 'RIGHT':
                 if (this.rightBound > this.element.pos.x) {
-                    this.element.move(200, 0);
+                    this.element.move(250, 0);
                 }
-            break;
         }
     }
 }

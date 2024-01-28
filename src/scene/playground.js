@@ -2,6 +2,7 @@ import kbm from "./../config/kaboom.js";
 import resources from "../utils/resources.js";
 import constants from "../utils/constants.js";
 import Spaceship from "../elements/Spaceship.js";
+import Asteroid from "../elements/Asteroids.js";
 
 function setBackground() {
     let scaleFactor;
@@ -21,9 +22,19 @@ function setBackground() {
 function addSpaceship() {
     const spaceship = new Spaceship();
     spaceship.registerControls();
+
+    return spaceship;
+}
+
+function addAsteroids() {
+    kbm.loop(kbm.rand(.5, 1), () => {
+        new Asteroid().rotate();
+        new Asteroid().rotate();
+    });
 }
 
 export default function playground() {
     setBackground();
-    addSpaceship();
+    const spaceship = addSpaceship();
+    addAsteroids();
 }

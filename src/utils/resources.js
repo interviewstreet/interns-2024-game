@@ -26,8 +26,8 @@ const resources = {
         width: 182,
         height: 182
     },
-    asteroids: {
-        image: [
+    asteroid: {
+        images: [
             { element: kbm.loadSprite('asteroid1', '../assets/sprites/asteroid1.png') },
             { element: kbm.loadSprite('asteroid2', '../assets/sprites/asteroid2.png') },
             { element: kbm.loadSprite('asteroid3', '../assets/sprites/asteroid3.png') },
