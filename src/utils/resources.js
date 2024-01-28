@@ -22,9 +22,9 @@ const resources = {
         height: 1024,
     },
     spaceship: {
-        element: kbm.loadSprite('spaceship', '../assets/sprites/spaceship1.png'),
-        width: 182,
-        height: 182
+        element: kbm.loadSprite('spaceship', '../assets/sprites/spaceship2.png'),
+        width: 170,
+        height: 102
     },
     asteroid: {
         images: [
@@ -53,6 +53,11 @@ const resources = {
             { element: kbm.loadSprite('explosion7', '../assets/sprites/explosion7.png') },
             { element: kbm.loadSprite('explosion8', '../assets/sprites/explosion8.png') }
         ]
+    },
+    hackerspace: {
+        element: kbm.loadSprite('hackerspace', '../assets/sprites/hackerspace.png'),
+        width: 2048,
+        height: 2048
     }
 };
 

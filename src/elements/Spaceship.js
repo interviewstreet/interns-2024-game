@@ -5,7 +5,7 @@ import resources from "../utils/resources.js";
 
 class Spaceship {
     constructor() {
-        this.scaleFactor = 1;
+        this.scaleFactor = 1.3;
         this.element = kbm.add([
             kbm.sprite("spaceship"),
             kbm.pos(constants.width / 2, constants.height - resources.spaceship.height * utils.responsiveFactor()),
@@ -20,12 +20,14 @@ class Spaceship {
         this.bottomBound = constants.height - ((resources.spaceship.height * utils.responsiveFactor()) / 2);
     }
 
-    registerControls() {
+    registerControlsForKeyboard() {
         kbm.onKeyDown("left", () => this.moveShip('LEFT'));
         kbm.onKeyDown("right", () => this.moveShip('RIGHT'));
         kbm.onKeyDown("up", () => this.moveShip('UP'));
         kbm.onKeyDown("down", () => this.moveShip('DOWN'));
-    
+    }
+
+    registerControlsForTouchscreen() {
         kbm.onMouseDown(() => {
             const mouseXCoord = kbm.mousePos().x;
             const spaceshipDirection = mouseXCoord < constants.width / 2 ? 'LEFT' : 'RIGHT';
@@ -37,22 +39,22 @@ class Spaceship {
         switch (direction) {
             case 'LEFT':
                 if (this.leftBound < this.element.pos.x) {
-                    this.element.move(-250, 0);
+                    this.element.move(-constants.speed, 0);
                 }
             break;
             case 'RIGHT':
                 if (this.rightBound > this.element.pos.x) {
-                    this.element.move(250, 0);
+                    this.element.move(constants.speed, 0);
                 }
             break;
             case 'UP': 
                 if (this.topBound < this.element.pos.y) {
-                    this.element.move(0, -250);
+                    this.element.move(0, -constants.speed);
                 }
             break;
             case 'DOWN':
                 if (this.bottomBound > this.element.pos.y) {
-                    this.element.move(0, 250);
+                    this.element.move(0, constants.speed);
                 }
             break;
         }
