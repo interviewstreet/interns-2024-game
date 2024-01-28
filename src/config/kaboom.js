@@ -13,10 +13,6 @@ const resources = {
         element: kbm.loadSprite('background', '../assets/img/background1.png'),
         width: 1024,
         height: 1024
-    },
-    rocker: {
-        element: '',
-        height: 32
     }
 };
 
