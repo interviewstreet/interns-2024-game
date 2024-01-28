@@ -1,7 +1,7 @@
 import kbm from "./../config/kaboom.js";
 import resources from "../utils/resources.js";
 import constants from "../utils/constants.js";
-import * as utils from "../utils/functions.js";
+import Spaceship from "../elements/Spaceship.js";
 
 function setBackground() {
     let scaleFactor;
@@ -19,31 +19,8 @@ function setBackground() {
 }
 
 function addSpaceship() {
-    const spaceship = kbm.add([
-        kbm.sprite("spaceship"),
-        kbm.pos(constants.width / 2, constants.height - resources.spaceship.height * utils.responsiveFactor()),
-        kbm.anchor("center"),
-        kbm.scale(1 * utils.responsiveFactor()),
-        kbm.area()
-    ]);
-
-    kbm.onKeyDown("left", () => {
-        spaceship.move(-200, 0);
-    });
-
-    kbm.onKeyDown("right", () => {
-        spaceship.move(200, 0);
-    });
-
-    kbm.onMouseDown(() => {
-        const mouseXCoord = kbm.mousePos().x;
-
-        if (mouseXCoord < constants.width / 2) {
-            spaceship.move(-200, 0);
-        } else {
-            spaceship.move(200, 0);
-        }
-    });
+    const spaceship = new Spaceship();
+    spaceship.registerControls();
 }
 
 export default function playground() {
