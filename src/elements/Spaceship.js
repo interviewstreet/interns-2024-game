@@ -11,16 +11,20 @@ class Spaceship {
             kbm.pos(constants.width / 2, constants.height - resources.spaceship.height * utils.responsiveFactor()),
             kbm.anchor("center"),
             kbm.scale(this.scaleFactor * utils.responsiveFactor()),
-            kbm.area()
+            kbm.area({ scale: 0.9 }),
+            "spaceship"
         ]);
         this.leftBound = (resources.spaceship.width * utils.responsiveFactor()) / 2;
         this.rightBound = constants.width - ((resources.spaceship.width * utils.responsiveFactor()) / 2);
+        this.topBound = (resources.spaceship.height * utils.responsiveFactor()) / 2;
+        this.bottomBound = constants.height - ((resources.spaceship.height * utils.responsiveFactor()) / 2);
     }
 
     registerControls() {
         kbm.onKeyDown("left", () => this.moveShip('LEFT'));
-    
         kbm.onKeyDown("right", () => this.moveShip('RIGHT'));
+        kbm.onKeyDown("up", () => this.moveShip('UP'));
+        kbm.onKeyDown("down", () => this.moveShip('DOWN'));
     
         kbm.onMouseDown(() => {
             const mouseXCoord = kbm.mousePos().x;
@@ -40,6 +44,17 @@ class Spaceship {
                 if (this.rightBound > this.element.pos.x) {
                     this.element.move(250, 0);
                 }
+            break;
+            case 'UP': 
+                if (this.topBound < this.element.pos.y) {
+                    this.element.move(0, -250);
+                }
+            break;
+            case 'DOWN':
+                if (this.bottomBound > this.element.pos.y) {
+                    this.element.move(0, 250);
+                }
+            break;
         }
     }
 }

@@ -33,8 +33,16 @@ function addAsteroids() {
     });
 }
 
+function handleCollision() {
+    kbm.onCollide("spaceship", "asteroid", (s, a, collision) => {
+        kbm.shake();
+        a.destroy();
+    });
+}
+
 export default function playground() {
     setBackground();
-    const spaceship = addSpaceship();
+    addSpaceship();
     addAsteroids();
+    handleCollision();
 }

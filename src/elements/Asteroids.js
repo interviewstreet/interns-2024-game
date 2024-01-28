@@ -16,9 +16,10 @@ class Asteroid {
             kbm.scale(randomAsteroidScale),
             kbm.pos(randomXCoord, -100),
             kbm.move(kbm.DOWN, kbm.rand(100, 300)),
-            kbm.area(),
+            kbm.area({ scale: 0.7 }),
             kbm.anchor("center"),
             kbm.offscreen({ destroy: true }),
+            kbm.body(),
             "asteroid"
         ]);
     }
