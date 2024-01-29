@@ -40,6 +40,13 @@ function handleCollision() {
         kbm.shake();
         Asteroid.explode(a);
     });
+
+    kbm.onCollide("bullet", "asteroid", (b, a, collision) => {
+        console.log(a);
+        Asteroid.explode(a);
+        a.paused = true;
+        b.destroy();
+    });
 }
 
 function clearIncomingAsteroidsTimer(incomingAsteroidsTimer) {

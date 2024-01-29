@@ -63,6 +63,11 @@ const resources = {
         element: kbm.loadSprite('hackerspace', '../assets/sprites/hackerspace.png'),
         width: 2048,
         height: 2048
+    },
+    bullet: {
+        element: kbm.loadSprite('bullet', '../assets/sprites/bullet1.png'),
+        width: 20,
+        height: 30
     }
 };
 

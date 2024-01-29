@@ -5,6 +5,7 @@ import resources from "../utils/resources.js";
 
 class Spaceship {
     constructor() {
+        this.bullets = 12;
         this.controls = true;
         this.scaleFactor = 1.3;
         this.element = kbm.add([
@@ -27,6 +28,14 @@ class Spaceship {
         kbm.onKeyDown("right", () => this.moveShip('RIGHT'));
         kbm.onKeyDown("up", () => this.moveShip('UP'));
         kbm.onKeyDown("down", () => this.moveShip('DOWN'));
+
+        kbm.onKeyDown("a", () => this.moveShip('LEFT'));
+        kbm.onKeyDown("d", () => this.moveShip('RIGHT'));
+        kbm.onKeyDown("w", () => this.moveShip('UP'));
+        kbm.onKeyDown("s", () => this.moveShip('DOWN'));
+
+        kbm.onKeyPress("space", () => this.shoot());
+        kbm.onKeyPress("tab", () => this.shoot());
     }
 
     registerControlsForTouchscreen() {
@@ -35,6 +44,29 @@ class Spaceship {
             const spaceshipDirection = mouseXCoord < constants.width / 2 ? 'LEFT' : 'RIGHT';
             this.moveShip(spaceshipDirection);
         });
+    }
+
+    shoot() {
+        if (!this.bullets) return;
+        if (!this.controls) return;
+
+        const bulletCoords = {
+            x: this.element.pos.x,
+            y: this.element.pos.y
+        };
+
+        kbm.add([
+            kbm.sprite('bullet'),
+            kbm.pos(bulletCoords.x, bulletCoords.y),
+            kbm.move(kbm.UP, 300),
+            kbm.anchor("center"),
+            kbm.scale(1.2),
+            kbm.offscreen({ destroy: true }),
+            kbm.area(),
+            'bullet'
+        ]);
+
+        this.bullets--;
     }
 
     moveShip(direction) {
