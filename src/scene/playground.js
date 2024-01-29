@@ -7,13 +7,13 @@ import Asteroid from "../elements/Asteroids.js";
 function setBackground() {
     let scaleFactor;
     if (constants.width > constants.height) {
-        scaleFactor = constants.width / resources.backgroundDesktopGreen.width;
+        scaleFactor = constants.width / resources.background.width;
     } else {
-        scaleFactor = constants.height / resources.backgroundDesktopGreen.height;
+        scaleFactor = constants.height / resources.background.height;
     }
     const marginDueToSkakeEffect = 0.2;
     kbm.add([
-        kbm.sprite("background-desktop-green"),
+        kbm.sprite("background"),
         kbm.pos(kbm.center()),
         kbm.anchor("center"),
         kbm.scale(scaleFactor + marginDueToSkakeEffect)
@@ -23,6 +23,7 @@ function setBackground() {
 function addSpaceship() {
     const spaceship = new Spaceship();
     spaceship.registerControlsForKeyboard();
+    return spaceship;
 }
 
 function addAsteroids() {
@@ -41,36 +42,48 @@ function handleCollision() {
     });
 }
 
-function stopAsteroidsAndShowHackerspace(timer) {
+function clearIncomingAsteroidsTimer(incomingAsteroidsTimer) {
+    const delay = constants.gameDuration * 1000;
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            clearInterval(incomingAsteroidsTimer);
+            resolve();
+        }, delay)
+    });
+}
+
+function showHackerspace() {
     const scaleFactor = 0.3;
 
-    setTimeout(() => {
-        clearInterval(timer);
+    const hackerspace = kbm.add([
+        kbm.sprite("hackerspace"),
+        kbm.anchor("center"),
+        kbm.scale(scaleFactor),
+        kbm.pos(constants.width / 2, -(scaleFactor * constants.width) / 2),
+    ]);
 
-        const hackerspace = kbm.add([
-            kbm.sprite("hackerspace"),
-            kbm.anchor("center"),
-            kbm.scale(scaleFactor),
-            kbm.pos(constants.width / 2, -(scaleFactor * constants.width) / 2),
-        ]);
-        
-        kbm.wait(7, () => {
-            const planetAnimationTimer = setInterval(() => {
-                hackerspace.pos.y += 10;
-                console.log(hackerspace.pos.y, constants.height / 2);
-                console.log((constants.height / 2 - hackerspace.pos.y));
-                if ((constants.height / 2 - hackerspace.pos.y) < 0) {
-                    clearInterval(planetAnimationTimer);
-                }
-            }, 100);
-        });
-    }, 10 * 1000)
+    const planetAnimationTimer = setInterval(() => {
+        hackerspace.pos.y += 10;
+        console.log(hackerspace.pos.y, constants.height / 2);
+        console.log((constants.height / 2 - hackerspace.pos.y));
+        if ((constants.height / 2 - hackerspace.pos.y) < 0) {
+            clearInterval(planetAnimationTimer);
+        }
+    }, 50);
 }
 
-export default function playground() {
+function playground() {
     setBackground();
-    addSpaceship();
-    const asteroidsTimer = addAsteroids();
+    const spaceship = addSpaceship();
+    const incomingAsteroidsTimer = addAsteroids();
     handleCollision();
-    stopAsteroidsAndShowHackerspace(asteroidsTimer);
+
+    clearIncomingAsteroidsTimer(incomingAsteroidsTimer)
+        .then(Asteroid.haveAllAsteroidsFlownOutOfView)
+        .then(() => {
+            spaceship.freezeAndCenterSpaceshipaAtGameEnd();
+            showHackerspace();
+        });
 }
+
+export default playground;

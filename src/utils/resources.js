@@ -21,6 +21,11 @@ const resources = {
         width: 1024,
         height: 1024,
     },
+    background: {
+        element: kbm.loadSprite('background', '../assets/img/background4.jpg'),
+        width: 2000,
+        height: 1333
+    },
     spaceship: {
         element: kbm.loadSprite('spaceship', '../assets/sprites/spaceship2.png'),
         width: 170,

@@ -5,6 +5,7 @@ import resources from "../utils/resources.js";
 
 class Spaceship {
     constructor() {
+        this.controls = true;
         this.scaleFactor = 1.3;
         this.element = kbm.add([
             kbm.sprite("spaceship"),
@@ -12,6 +13,7 @@ class Spaceship {
             kbm.anchor("center"),
             kbm.scale(this.scaleFactor * utils.responsiveFactor()),
             kbm.area({ scale: 0.9 }),
+            kbm.z(1),
             "spaceship"
         ]);
         this.leftBound = (resources.spaceship.width * utils.responsiveFactor()) / 2;
@@ -36,6 +38,7 @@ class Spaceship {
     }
 
     moveShip(direction) {
+        if (!this.controls) return;
         switch (direction) {
             case 'LEFT':
                 if (this.leftBound < this.element.pos.x) {
@@ -58,6 +61,47 @@ class Spaceship {
                 }
             break;
         }
+    }
+
+    freezeAndCenterSpaceshipaAtGameEnd() {
+        this.controls = false;
+        const centerX = constants.width / 2;
+        const centerY = constants.height / 2;
+
+        const {x: spaceshipXCoord, y: spaceshipYCoord } = this.element.pos;
+        const directionToMoveIn = {
+            Xaxis: spaceshipXCoord < centerX,
+            Yaxis: spaceshipYCoord < centerY
+        };
+
+        let isSpaceshipCenteredOnXaxis = false;
+        let isSpaceshipCenteredOnYaxis = false;
+
+        const timer = setInterval(() => {
+            if (Math.abs(this.element.pos.x - centerX) >= 10) {
+                if (directionToMoveIn.Xaxis) {
+                    this.element.pos.x += 10;
+                } else {
+                    this.element.pos.x -= 10;
+                }
+            } else {
+                isSpaceshipCenteredOnXaxis = true;
+            }
+
+            if (Math.abs(this.element.pos.y - centerY) >= 10) {
+                if (directionToMoveIn.Yaxis) {
+                    this.element.pos.y += 10;
+                } else {
+                    this.element.pos.y -= 10;
+                }
+            } else {
+                isSpaceshipCenteredOnYaxis =  true;
+            }
+
+            if (isSpaceshipCenteredOnXaxis && isSpaceshipCenteredOnYaxis) {
+                clearInterval(timer);
+            }
+        }, 50);
     }
 }
 

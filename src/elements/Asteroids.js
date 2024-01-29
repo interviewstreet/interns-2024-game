@@ -30,6 +30,20 @@ class Asteroid {
         });
     }
 
+    static haveAllAsteroidsFlownOutOfView() {
+        const checkForAsteroidsAtInterval = 100;
+
+        return new Promise((resolve) => {
+            const checkForAsteroidsTimer = setInterval(() => {
+                let asteroids = kbm.get("asteroid");
+                if (!asteroids.length) {
+                    clearInterval(checkForAsteroidsAtInterval);
+                    resolve();
+                }
+            }, checkForAsteroidsAtInterval)
+        })
+    }
+
     static explode(asteroid) {
         let explosionImageCount = 1;
         const maxExplosionImage = resources.explosion.images.length;
