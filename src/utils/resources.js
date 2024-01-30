@@ -68,6 +68,9 @@ const resources = {
         element: kbm.loadSprite('bullet', '../assets/sprites/bullet1.png'),
         width: 20,
         height: 30
+    },
+    font: {
+        element: kbm.loadFont('Honk', '../assets/font/Honk-Regular.ttf')
     }
 };
 

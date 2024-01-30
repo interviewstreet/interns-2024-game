@@ -114,7 +114,6 @@ class Spaceship {
             this.healthStatus = 'DESTROYED';
         }
 
-        console.log(healthStatusCategoriesCount, nOfcollisionPerStatus, this.collisions);
         for (let i = 1; i <= healthStatusCategoriesCount; i++) {
             if (this.collisions < nOfcollisionPerStatus * i) {
                 this.healthStatus = Spaceship.HEALTH_STATUS[i];
