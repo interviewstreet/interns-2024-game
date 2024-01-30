@@ -79,6 +79,23 @@ class Spaceship {
         this.bullets--;
     }
 
+    explode() {
+        let explosionImageCount = 1;
+        const maxExplosionImage = resources.explosion.images.length;
+        
+        const timer = setInterval(() => {
+            if (explosionImageCount == 1) this.element.scaleTo(this.element.scale.x + 2, this.element.scale.y + 2);
+            
+            this.element.use(kbm.sprite(`explosion${explosionImageCount}`));
+            explosionImageCount++;
+
+            if (maxExplosionImage === explosionImageCount) {
+                this.element.destroy();
+                clearTimeout(timer);
+            }
+        }, 100);
+    }
+
     moveShip(direction) {
         if (!this.controls) return;
         switch (direction) {

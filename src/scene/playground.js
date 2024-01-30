@@ -39,6 +39,10 @@ function registerCollisionEvents(spaceship, asteroidBuilder) {
         let asteroid = asteroidBuilder.get(a.id)
         asteroid.explode();
         spaceship.decreaseHealthStatus();
+
+        if (spaceship.healthStatus === 'DESTROYED') {
+            spaceship.explode();
+        }
     });
 
     kbm.onCollide("bullet", "asteroid", (b, a, collision) => {
@@ -131,7 +135,7 @@ function showMetrics(bulletCount, spaceshipHealth, gameCompletionPercentage) {
         bulletCountText.destroy();
         spaceshipHealthText.destroy();
         gameCompletionPercentageText.destroy();
-    })
+    });
 }
 
 function playground() {
