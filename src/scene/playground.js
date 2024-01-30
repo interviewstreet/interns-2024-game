@@ -27,24 +27,27 @@ function addSpaceship() {
 }
 
 function addAsteroids() {
+    Asteroid.registerEventListeners();
     let timer = setInterval(() => {
-        new Asteroid().rotate();
-        new Asteroid().rotate();
+        let asteroid = new Asteroid(1)
+        asteroid.rotate();
     }, kbm.rand(500, 600));
 
     return timer;
 }
 
-function handleCollision() {
+function registerCollisionEvents(spaceship) {
     kbm.onCollide("spaceship", "asteroid", (s, a, collision) => {
         kbm.shake();
-        Asteroid.explode(a);
+        let asteroid = Asteroid.get(a.id)
+        asteroid.explode();
+        spaceship.decreaseHealthStatus();
     });
 
     kbm.onCollide("bullet", "asteroid", (b, a, collision) => {
-        console.log(a);
-        Asteroid.explode(a);
-        a.paused = true;
+        let asteroid = Asteroid.get(a.id)
+        asteroid.explode();
+        asteroid.element.paused = true;
         b.destroy();
     });
 }
@@ -79,11 +82,31 @@ function showHackerspace() {
     }, 50);
 }
 
+function showMetrics(spaceship) {
+    const extraTime = 8;
+    const gameLength = constants.gameDuration + extraTime;
+    
+    let secondsElapsed = 0;
+    const metricsTimers = setInterval(() => {
+        secondsElapsed++;
+        let bulletCount = spaceship.bullets;
+        let spaceshipHealth = spaceship.healthStatus;
+
+        let gameCompletionPercentage = Math.floor((secondsElapsed / gameLength) * 100);
+
+        console.log(bulletCount, spaceshipHealth, gameCompletionPercentage);
+
+        if (gameCompletionPercentage === 100) clearInterval(metricsTimers);
+    }, 1000);
+}
+
 function playground() {
     setBackground();
     const spaceship = addSpaceship();
     const incomingAsteroidsTimer = addAsteroids();
-    handleCollision();
+    registerCollisionEvents(spaceship);
+
+    showMetrics(spaceship);
 
     clearIncomingAsteroidsTimer(incomingAsteroidsTimer)
         .then(Asteroid.haveAllAsteroidsFlownOutOfView)

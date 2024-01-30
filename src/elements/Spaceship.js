@@ -4,7 +4,17 @@ import constants from "../utils/constants.js";
 import resources from "../utils/resources.js";
 
 class Spaceship {
+    static HEALTH_STATUS = {
+        1: 'BEST',
+        2: 'GOOD',
+        3: 'AVERAGE',
+        4: 'POOR',
+        5: 'CRITICAL'
+    };
+
     constructor() {
+        this.collisions = 0;
+        this.healthStatus = Spaceship.HEALTH_STATUS[1];
         this.bullets = 12;
         this.controls = true;
         this.scaleFactor = 1.3;
@@ -92,6 +102,24 @@ class Spaceship {
                     this.element.move(0, constants.speed);
                 }
             break;
+        }
+    }
+
+    decreaseHealthStatus() {
+        this.collisions++;
+        const healthStatusCategoriesCount = Object.keys(Spaceship.HEALTH_STATUS).length;
+        const nOfcollisionPerStatus = constants.spaceshipCollisionCapacity / healthStatusCategoriesCount;
+
+        if (this.collisions === constants.spaceshipCollisionCapacity) {
+            this.healthStatus = 'DESTROYED';
+        }
+
+        console.log(healthStatusCategoriesCount, nOfcollisionPerStatus, this.collisions);
+        for (let i = 1; i <= healthStatusCategoriesCount; i++) {
+            if (this.collisions < nOfcollisionPerStatus * i) {
+                this.healthStatus = Spaceship.HEALTH_STATUS[i];
+                break;
+            }
         }
     }
 
