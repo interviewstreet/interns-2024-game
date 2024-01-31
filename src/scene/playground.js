@@ -4,6 +4,8 @@ import constants from "../utils/constants.js";
 import Spaceship from "../elements/Spaceship.js";
 import AsteroidBuilder from "../elements/AsteroidBuilder.js";
 
+let isGameOver = false;
+
 function setBackground() {
     let scaleFactor;
     if (constants.width > constants.height) {
@@ -41,6 +43,7 @@ function registerAsteroidSpaceshipCollisionEvent(spaceship, asteroidBuilder, met
         spaceship.decreaseHealthStatus();
 
         if (spaceship.healthStatus === 'DESTROYED') {
+            isGameOver = true;
             spaceship.explode('spaceship');
             asteroidBuilder.deleteAsteroids();
             clearInterval(metricsTimer);
@@ -60,8 +63,12 @@ function registerBulletAsteroidCollisionEvent(spaceship, asteroidBuilder) {
 
 function clearIncomingAsteroidsTimer(incomingAsteroidsTimer) {
     const delay = constants.gameDuration * 1000;
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         setTimeout(() => {
+            if (isGameOver) {
+                console.log("yes");
+                reject();
+            }
             clearInterval(incomingAsteroidsTimer);
             resolve();
         }, delay)
@@ -163,7 +170,8 @@ function playground() {
             spaceship.freezeAndCenterSpaceshipaAtGameEnd();
             return showHackerspace();
         })
-        .then(() => kbm.go("win"));
+        .then(() => kbm.go("win"))
+        .catch(e => console.log(e))
 }
 
 export default playground;
