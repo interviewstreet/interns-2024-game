@@ -15,7 +15,7 @@ class Spaceship {
     constructor() {
         this.collisions = 0;
         this.healthStatus = Spaceship.HEALTH_STATUS[1];
-        this.bullets = 12;
+        this.bullets = constants.bullets;
         this.controls = true;
         this.scaleFactor = 1.3;
         this.element = kbm.add([

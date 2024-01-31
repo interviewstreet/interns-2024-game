@@ -27,7 +27,7 @@ function addSpaceship() {
 }
 
 function initiateAsteroidField() {
-    const asteroidBuilder = new AsteroidBuilder(2);
+    const asteroidBuilder = new AsteroidBuilder(3);
     asteroidBuilder.registerEventListeners();
 
     return asteroidBuilder;
@@ -42,6 +42,7 @@ function registerCollisionEvents(spaceship, asteroidBuilder) {
 
         if (spaceship.healthStatus === 'DESTROYED') {
             spaceship.explode();
+            // kbm.go("loose");
         }
     });
 
@@ -73,12 +74,15 @@ function showHackerspace() {
         kbm.pos(constants.width / 2, -(scaleFactor * constants.width) / 2),
     ]);
 
-    const planetAnimationTimer = setInterval(() => {
-        hackerspace.pos.y += 10;
-        if ((constants.height / 2 - hackerspace.pos.y) < 0) {
-            clearInterval(planetAnimationTimer);
-        }
-    }, 50);
+    return new Promise((reslove) => {
+        const planetAnimationTimer = setInterval(() => {
+            hackerspace.pos.y += 10;
+            if ((constants.height / 2 - hackerspace.pos.y) < 0) {
+                clearInterval(planetAnimationTimer);
+                resolve();
+            }
+        }, 50);
+    })
 }
 
 function calculateMetrics(spaceship) {
@@ -152,7 +156,8 @@ function playground() {
         .then(() => {
             spaceship.freezeAndCenterSpaceshipaAtGameEnd();
             showHackerspace();
-        });
+        })
+        .then(() => kbm.go("win"));
 }
 
 export default playground;

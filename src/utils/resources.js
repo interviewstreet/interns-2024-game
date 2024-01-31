@@ -1,25 +1,15 @@
 import kbm from "../config/kaboom.js";
 
 const resources = {
-    backgroundMobile: {
-        element: kbm.loadSprite('background-mobile', '../assets/img/bg-medium.png'),
-        width: 672,
-        height: 1920
+    startScreenBackground: {
+        element: kbm.loadSprite('startScreenBackground', '../assets/img/start.jpg'),
+        width: 2000,
+        height: 1334
     },
-    backgroundDesktopGreen: {
-        element: kbm.loadSprite('background-desktop-green', '../assets/img/background1.png'),
-        width: 1024,
-        height: 1024
-    },
-    backgroundDesktopBlue: {
-        element: kbm.loadSprite('background-desktop-blue', '../assets/img/background2.png'),
-        width: 1024,
-        height: 1024,
-    },
-    backgroundDesktopPurple: {
-        element: kbm.loadSprite('background-desktop-purple', '../assets/img/background3.png'),
-        width: 1024,
-        height: 1024,
+    storyScreenBackground: {
+        element: kbm.loadSprite('storyScreenBackground', '../assets/img/background6.jpg'),
+        width: 1625,
+        height: 722
     },
     background: {
         element: kbm.loadSprite('background', '../assets/img/background4.jpg'),
@@ -69,8 +59,27 @@ const resources = {
         width: 20,
         height: 30
     },
-    font: {
+    fontHonk: {
         element: kbm.loadFont('Honk', '../assets/font/Honk-Regular.ttf')
+    },
+    fontValorax: {
+        element: kbm.loadFont('Valorax', '../assets/font/Valorax-lg25V.otf')
+    },
+    fontBruceForever: {
+        element: kbm.loadFont('BruceForever', '../assets/font/BruceForeverRegular.ttf')
+    },
+    fontKanitBold: {
+        element: kbm.loadFont('KanitBold', '../assets/font/Kanit-Bold.ttf')
+    },
+    hari: {
+        element: kbm.loadSprite('hari', '../assets/img/hari.png'),
+        width: 500,
+        height: 500,
+    },
+    vaasavi: {
+        element: kbm.loadSprite('vaasavi', '../assets/img/vaasavi.png'),
+        width: 500,
+        height: 500
     }
 };
 
