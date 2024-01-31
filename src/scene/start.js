@@ -2,10 +2,6 @@ import kbm from "../config/kaboom.js";
 import resources from "../utils/resources.js";
 import constants from "../utils/constants.js";
 
-function playBackgroundMusic() {
-
-}
-
 function setBackground() {
     let scaleFactor;
     if (constants.width > constants.height) {
@@ -54,16 +50,48 @@ function addMainText() {
 }
 
 function switchToStoryScreen() {
-    setTimeout(() => {
+    const switchingTimer = setTimeout(() => {
         kbm.go("story")
     }, 9000);
+
+    return switchingTimer;
+}
+
+function skipToPlayground(switchingTimer) {
+    clearInterval(switchingTimer)
+    kbm.add([
+        kbm.pos(constants.width - 40, constants.height - 40),
+        kbm.text("Skip", {
+            size: 20,
+            font: "KanitBold",
+            align: "center"
+        }),
+        kbm.area(),
+        kbm.anchor("right"),
+        "skip"
+    ]);
+
+    kbm.onClick("skip", () => {
+        kbm.go("playground");
+    });
+}
+
+function soundMessage() {
+    kbm.add([
+        kbm.pos(40, constants.height - 40),
+        kbm.text("Click anywhere on screen to enable music", {
+            size: 20,
+            font: "KanitBold"
+        })
+    ]);
 }
 
 function start() {
-    playBackgroundMusic();
     setBackground();
     addMainText();
-    switchToStoryScreen();
+    const timer = switchToStoryScreen();
+    skipToPlayground(timer);
+    soundMessage();
 }
 
 export default start;

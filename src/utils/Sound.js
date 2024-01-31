@@ -26,6 +26,7 @@ class Sound {
         }
         if (music === 'backgroundMusic') {
             options['loop'] = true;
+            options['volume'] = 0.6;
         }
         this[music] = kbm.play(music, options);
     }

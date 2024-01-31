@@ -1,7 +1,6 @@
 import kbm from "../config/kaboom.js";
 import resources from "../utils/resources.js";
 import constants from "../utils/constants.js";
-import Sound from "../utils/Sound.js";
 
 function setBackground() {
     let scaleFactor = constants.height / resources.storyScreenBackground.height;
@@ -171,7 +170,7 @@ function playButton() {
         kbm.move(kbm.UP, 300),
         "btnBox",
     ]);
-    
+
     const btnText = kbm.add([
         kbm.pos(constants.width / 2, constants.height + 300),
         kbm.text("Help Hari", {
