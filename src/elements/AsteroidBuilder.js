@@ -52,6 +52,13 @@ class AsteroidBuilder {
         });
     }
 
+    deleteAsteroids() {
+        clearInterval(this.timer);
+        this.activeAsteroids.forEach(asteroid => {
+            asteroid.element.destroy();
+        });
+    }
+
     haveAllAsteroidsFlownOutOfView() {
         const checkForAsteroidsAtInterval = 100;
 

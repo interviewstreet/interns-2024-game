@@ -27,13 +27,13 @@ function addSpaceship() {
 }
 
 function initiateAsteroidField() {
-    const asteroidBuilder = new AsteroidBuilder(3);
+    const asteroidBuilder = new AsteroidBuilder(2);
     asteroidBuilder.registerEventListeners();
 
     return asteroidBuilder;
 }
 
-function registerCollisionEvents(spaceship, asteroidBuilder) {
+function registerAsteroidSpaceshipCollisionEvent(spaceship, asteroidBuilder, metricsTimer) {
     kbm.onCollide("spaceship", "asteroid", (s, a, collision) => {
         kbm.shake();
         let asteroid = asteroidBuilder.get(a.id)
@@ -42,10 +42,14 @@ function registerCollisionEvents(spaceship, asteroidBuilder) {
 
         if (spaceship.healthStatus === 'DESTROYED') {
             spaceship.explode();
-            // kbm.go("loose");
+            asteroidBuilder.deleteAsteroids();
+            clearInterval(metricsTimer);
+            kbm.go("lose");
         }
     });
+}
 
+function registerBulletAsteroidCollisionEvent(spaceship, asteroidBuilder) {
     kbm.onCollide("bullet", "asteroid", (b, a, collision) => {
         let asteroid = asteroidBuilder.get(a.id)
         asteroid.explode();
@@ -74,7 +78,7 @@ function showHackerspace() {
         kbm.pos(constants.width / 2, -(scaleFactor * constants.width) / 2),
     ]);
 
-    return new Promise((reslove) => {
+    return new Promise((resolve) => {
         const planetAnimationTimer = setInterval(() => {
             hackerspace.pos.y += 10;
             if ((constants.height / 2 - hackerspace.pos.y) < 0) {
@@ -103,6 +107,8 @@ function calculateMetrics(spaceship) {
 
         showMetrics(bulletCount, spaceshipHealth, gameCompletionPercentage);
     }, 500);
+
+    return metricsTimers;
 }
 
 function showMetrics(bulletCount, spaceshipHealth, gameCompletionPercentage) {
@@ -147,9 +153,10 @@ function playground() {
     const spaceship = addSpaceship();
     const asteroidBuilder = initiateAsteroidField();
 
-    registerCollisionEvents(spaceship, asteroidBuilder);
-
-    calculateMetrics(spaceship);
+    const metricsTimer = calculateMetrics(spaceship);
+    
+    registerAsteroidSpaceshipCollisionEvent(spaceship, asteroidBuilder, metricsTimer);
+    registerBulletAsteroidCollisionEvent(spaceship, asteroidBuilder);
 
     clearIncomingAsteroidsTimer(asteroidBuilder.timer)
         .then(asteroidBuilder.haveAllAsteroidsFlownOutOfView)

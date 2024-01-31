@@ -16,7 +16,7 @@ function setBackground() {
         kbm.rect(constants.width, constants.height),
         kbm.pos(0, 0),
         kbm.color(kbm.BLACK),
-        kbm.opacity(.6)
+        kbm.opacity(.45)
     ]);
 }
 
@@ -27,8 +27,8 @@ function getDialogueBoxCoordinates(boxNumber) {
     const dialogueImageHeight = 130;
     const dialogueBoxHeight = 130;
     const dialogueBoxWidth = 800;
-    const gutterBetweenBoxes = 30;
-    const gutterBetweenBoxAndImage = 20;
+    const gutterBetweenBoxes = 50;
+    const gutterBetweenBoxAndImage = 40;
 
     const boxCoords = {
         x: 0,
@@ -156,6 +156,52 @@ function insertRightDialogue(message, dialogueNumber) {
     });
 }
 
+function playButton() {
+    let isBtnBoxAligned = false;
+    let isBtnTextAligned = false;
+
+    const btn = kbm.add([
+        kbm.pos(constants.width / 2, constants.height + 300),
+        kbm.rect(280, 90),
+        kbm.color(kbm.WHITE),
+        kbm.anchor("center"),
+        kbm.outline(10, kbm.BLACK),
+        kbm.area(),
+        kbm.move(kbm.UP, 300),
+        "btnBox",
+    ]);
+    const btnText = kbm.add([
+        kbm.pos(constants.width / 2, constants.height + 300),
+        kbm.text("Help Hari", {
+            size: 30,
+            align: "center",
+            font: "Valorax"
+        }),
+        kbm.color(kbm.BLACK),
+        kbm.anchor("center"),
+        kbm.move(kbm.UP, 300)
+    ]);
+
+    kbm.onClick("btnBox", () => {
+        kbm.go("playground");
+    });
+
+    const timer = setInterval(() => {
+        if (btn.pos.y < constants.height - 100) {
+            btn.paused = true;
+            isBtnBoxAligned = true;
+        }
+        if (btnText.pos.y < constants.height - 103) {
+            btnText.paused = true;
+            isBtnTextAligned = true;
+        }
+
+        if (isBtnBoxAligned && isBtnTextAligned) {
+            clearInterval(timer);
+        }
+    }, 30);
+}
+
 function story() {
     setBackground();
 
@@ -163,8 +209,7 @@ function story() {
     .then(() => insertRightDialogue(constants.story[1].message, 2))
     .then(() => insertLeftDialogue(constants.story[2].message, 3))
     .then(() => insertRightDialogue(constants.story[3].message, 4))
-    .then(() => console.log('done'));
-    
+    .then(playButton);
 }
 
 export default story;
