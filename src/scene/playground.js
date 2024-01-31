@@ -37,11 +37,11 @@ function registerAsteroidSpaceshipCollisionEvent(spaceship, asteroidBuilder, met
     kbm.onCollide("spaceship", "asteroid", (s, a, collision) => {
         kbm.shake();
         let asteroid = asteroidBuilder.get(a.id)
-        asteroid.explode();
+        asteroid.explode('spaceship');
         spaceship.decreaseHealthStatus();
 
         if (spaceship.healthStatus === 'DESTROYED') {
-            spaceship.explode();
+            spaceship.explode('spaceship');
             asteroidBuilder.deleteAsteroids();
             clearInterval(metricsTimer);
             kbm.go("lose");
@@ -52,7 +52,7 @@ function registerAsteroidSpaceshipCollisionEvent(spaceship, asteroidBuilder, met
 function registerBulletAsteroidCollisionEvent(spaceship, asteroidBuilder) {
     kbm.onCollide("bullet", "asteroid", (b, a, collision) => {
         let asteroid = asteroidBuilder.get(a.id)
-        asteroid.explode();
+        asteroid.explode('bullet');
         asteroid.element.paused = true;
         b.destroy();
     });
@@ -76,13 +76,14 @@ function showHackerspace() {
         kbm.anchor("center"),
         kbm.scale(scaleFactor),
         kbm.pos(constants.width / 2, -(scaleFactor * constants.width) / 2),
+        kbm.move(kbm.DOWN, 200)
     ]);
 
     return new Promise((resolve) => {
         const planetAnimationTimer = setInterval(() => {
-            hackerspace.pos.y += 10;
-            if ((constants.height / 2 - hackerspace.pos.y) < 0) {
+            if (hackerspace.pos.y > constants.height / 2) {
                 clearInterval(planetAnimationTimer);
+                console.log("how");
                 resolve();
             }
         }, 50);
@@ -100,8 +101,6 @@ function calculateMetrics(spaceship) {
         let spaceshipHealth = spaceship.healthStatus;
 
         let gameCompletionPercentage = Math.floor((secondsElapsed / gameLength) * 100);
-
-        console.log(bulletCount, spaceshipHealth, gameCompletionPercentage);
 
         if (gameCompletionPercentage === 100) clearInterval(metricsTimers);
 
@@ -162,7 +161,7 @@ function playground() {
         .then(asteroidBuilder.haveAllAsteroidsFlownOutOfView)
         .then(() => {
             spaceship.freezeAndCenterSpaceshipaAtGameEnd();
-            showHackerspace();
+            return showHackerspace();
         })
         .then(() => kbm.go("win"));
 }

@@ -2,6 +2,7 @@ import kbm from "../config/kaboom.js";
 import * as utils from "./../utils/functions.js";
 import constants from "../utils/constants.js";
 import resources from "../utils/resources.js";
+import Sound from "../utils/Sound.js";
 
 class Spaceship {
     static HEALTH_STATUS = {
@@ -60,6 +61,8 @@ class Spaceship {
         if (!this.bullets) return;
         if (!this.controls) return;
 
+        Sound.playMusic('bulletMusic');
+
         const bulletCoords = {
             x: this.element.pos.x,
             y: this.element.pos.y
@@ -68,7 +71,7 @@ class Spaceship {
         kbm.add([
             kbm.sprite('bullet'),
             kbm.pos(bulletCoords.x, bulletCoords.y),
-            kbm.move(kbm.UP, 300),
+            kbm.move(kbm.UP, 500),
             kbm.anchor("center"),
             kbm.scale(1.2),
             kbm.offscreen({ destroy: true }),

@@ -12,14 +12,14 @@ const resources = {
         height: 722
     },
     background: {
-        element: kbm.loadSprite('background', '../assets/img/background5.jpg'),
+        element: kbm.loadSprite('background', '../assets/img/background4.jpg'),
         width: 2000,
         height: 1143
     },
     spaceship: {
-        element: kbm.loadSprite('spaceship', '../assets/sprites/spaceship2.png'),
+        element: kbm.loadSprite('spaceship', '../assets/sprites/spaceship.png'),
         width: 170,
-        height: 102
+        height: 141
     },
     asteroid: {
         images: [
@@ -80,6 +80,24 @@ const resources = {
         element: kbm.loadSprite('vaasavi', '../assets/img/vaasavi.png'),
         width: 500,
         height: 500
+    },
+    backgroundMusic: {
+        element: kbm.loadSound('backgroundMusic', '../assets/sounds/backgroundMusic.mp3')
+    },
+    asteroidSpaceshipCollisionMusic: {
+        element: kbm.loadSound('asteroidSpaceshipCollisionMusic', '../assets/sounds/asteroidSpaceshipCollisionMusic.mp3')
+    },
+    bulletAsteroidCollisionMusic: {
+        element: kbm.loadSound('bulletAsteroidCollisionMusic', '../assets/sounds/bulletAsteroidCollisionMusic.mp3')
+    },
+    bullet: {
+        element: kbm.loadSound('bulletMusic', '../assets/sounds/bullet.mp3')
+    },
+    win: {
+        element: kbm.loadSound('winMusic', '../assets/sounds/win.mp3')
+    },
+    lose: {
+        element: kbm.loadSound('loseMusic', '../assets/sounds/lose.mp3')
     }
 };
 

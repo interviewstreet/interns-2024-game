@@ -2,6 +2,10 @@ import kbm from "../config/kaboom.js";
 import resources from "../utils/resources.js";
 import constants from "../utils/constants.js";
 
+function playBackgroundMusic() {
+
+}
+
 function setBackground() {
     let scaleFactor;
     if (constants.width > constants.height) {
@@ -52,10 +56,11 @@ function addMainText() {
 function switchToStoryScreen() {
     setTimeout(() => {
         kbm.go("story")
-    }, 10000);
+    }, 9000);
 }
 
 function start() {
+    playBackgroundMusic();
     setBackground();
     addMainText();
     switchToStoryScreen();

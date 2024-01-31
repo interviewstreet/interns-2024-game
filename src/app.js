@@ -4,6 +4,15 @@ import start from "./scene/start.js";
 import story from "./scene/story.js";
 import win from "./scene/win.js";
 import lose from "./scene/lose.js";
+import Sound from "./utils/Sound.js";
+
+(function getSoundPermission() {
+    let audioContext;
+    window.onload = function() {
+        audioContext = new AudioContext();
+        Sound.enableAudio(audioContext);
+    }
+})();
 
 function loadGameScenes() {
     kbm.scene("playground", playground);

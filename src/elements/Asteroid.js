@@ -1,6 +1,6 @@
 import kbm from "../config/kaboom.js";
 import resources from "../utils/resources.js";
-
+import Sound from "../utils/Sound.js";
 class Asteroid {
     constructor(randomAsteroidId, randomAsteroidScale, randomXCoord) {
         this.element = kbm.add([
@@ -23,7 +23,13 @@ class Asteroid {
         });
     }
 
-    explode() {
+    explode(hitBy) {
+        if (hitBy === 'spaceship') {
+            Sound.playMusic('asteroidSpaceshipCollisionMusic');
+        } else {
+            Sound.playMusic('bulletAsteroidCollisionMusic');
+        }
+
         let explosionImageCount = 1;
         const maxExplosionImage = resources.explosion.images.length;
         
