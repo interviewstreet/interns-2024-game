@@ -67,7 +67,6 @@ function clearIncomingAsteroidsTimer(incomingAsteroidsTimer) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             if (isGameOver) {
-                console.log("yes");
                 reject();
             }
             clearInterval(incomingAsteroidsTimer);
@@ -91,7 +90,6 @@ function showHackerspace() {
         const planetAnimationTimer = setInterval(() => {
             if (hackerspace.pos.y > constants.height / 2) {
                 clearInterval(planetAnimationTimer);
-                console.log("how");
                 resolve();
             }
         }, 50);

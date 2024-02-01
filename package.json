@@ -11,5 +11,14 @@
   "license": "ISC",
   "dependencies": {
     "maze-generation": "^3.1.2"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Suyash-Purwar/interns-2024-game.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Suyash-Purwar/interns-2024-game/issues"
+  },
+  "homepage": "https://github.com/Suyash-Purwar/interns-2024-game#readme"
 }

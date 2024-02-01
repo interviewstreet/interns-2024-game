@@ -15,12 +15,70 @@ body {
     background: url('../../assets/img/ending.webp');
     background-position:  center;
     background-repeat: no-repeat;
+    background-size: cover;
     height: 100vh
 }
 
 .ending {
     max-width: 1240px;
     margin: 0 auto;
+}
+
+.mobile {
+    display: none;
+}
+
+.mobile nav {
+    padding: 30px 0;
+}
+
+.mobile h1 {
+    color: #fff;
+    text-align: center;
+    font-size: 30px;
+    position: relative;
+}
+
+.mobile .dialogue {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    width: 90%;
+    padding: 20px;
+    text-align: center;
+    /* background-color: #0000004b; */
+    color: #fff;
+}
+
+.mobile img {
+    text-align: center;
+}
+
+@media only screen and (max-width: 1300px) {
+    body {
+        background: url('../../assets/img/story.webp');
+        background-position:  center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .mobile {
+        height: 100vh;
+        display: block;
+    }
+    .ending {
+        display: none;
+    }
+    canvas {
+        display: none;
+    }
+    .mobile h3 {
+        font-size: 30px;
+    }
+    .mobile p {
+        margin-top: 15px;
+        font-size: 20px;
+    }
 }
 
 nav {

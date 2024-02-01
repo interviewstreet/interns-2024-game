@@ -92,7 +92,6 @@ function insertLeftDialogue(message, dialogueNumber) {
 
         let timer = setInterval(() => {
             if (image.pos.x > imageCoords.x) {
-            console.log(image.pos.x, imageCoords.x);
                 image.paused = true;
                 isImageAligned = true;
             }
@@ -137,10 +136,7 @@ function insertRightDialogue(message, dialogueNumber) {
         let isBoxAligned = false;
 
         let timer = setInterval(() => {
-            console.log(image.pos.x, imageCoords.x);
-            console.log(box.pos.x);
             if (image.pos.x < imageCoords.x) {
-            console.log(image.pos.x, imageCoords.x);
                 image.paused = true;
                 isImageAligned = true;
             }
