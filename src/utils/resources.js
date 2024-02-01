@@ -2,17 +2,17 @@ import kbm from "../config/kaboom.js";
 
 const resources = {
     startScreenBackground: {
-        element: kbm.loadSprite('startScreenBackground', '../assets/img/start.jpg'),
+        element: kbm.loadSprite('startScreenBackground', '../assets/img/start.webp'),
         width: 2000,
         height: 1334
     },
     storyScreenBackground: {
-        element: kbm.loadSprite('storyScreenBackground', '../assets/img/background6.jpg'),
+        element: kbm.loadSprite('storyScreenBackground', '../assets/img/story.webp'),
         width: 1625,
         height: 722
     },
     background: {
-        element: kbm.loadSprite('background', '../assets/img/background4.jpg'),
+        element: kbm.loadSprite('background', '../assets/img/playground.webp'),
         width: 2000,
         height: 1143
     },
@@ -50,7 +50,7 @@ const resources = {
         ]
     },
     hackerspace: {
-        element: kbm.loadSprite('hackerspace', '../assets/sprites/hackerspace.png'),
+        element: kbm.loadSprite('hackerspace', '../assets/sprites/hackerspace.webp'),
         width: 2048,
         height: 2048
     },
@@ -72,12 +72,12 @@ const resources = {
         element: kbm.loadFont('KanitBold', '../assets/font/Kanit-Bold.ttf')
     },
     hari: {
-        element: kbm.loadSprite('hari', '../assets/img/hari.png'),
+        element: kbm.loadSprite('hari', '../assets/img/hari.webp'),
         width: 500,
         height: 500,
     },
     vaasavi: {
-        element: kbm.loadSprite('vaasavi', '../assets/img/vaasavi.png'),
+        element: kbm.loadSprite('vaasavi', '../assets/img/vaasavi.webp'),
         width: 500,
         height: 500
     },

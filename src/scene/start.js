@@ -3,12 +3,7 @@ import resources from "../utils/resources.js";
 import constants from "../utils/constants.js";
 
 function setBackground() {
-    let scaleFactor;
-    if (constants.width > constants.height) {
-        scaleFactor = constants.width / resources.startScreenBackground.width;
-    } else {
-        scaleFactor = constants.height / resources.startScreenBackground.height;
-    }
+    let scaleFactor = resources.startScreenBackground.height / constants.height;
     
     kbm.add([
         kbm.sprite("startScreenBackground"),
