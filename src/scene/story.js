@@ -172,7 +172,7 @@ function playButton() {
         kbm.text("Help Hari", {
             size: 30,
             align: "center",
-            font: "Valorax"
+            font: "KanitBold"
         }),
         kbm.color(kbm.BLACK),
         kbm.anchor("center"),
