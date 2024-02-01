@@ -1,0 +1,79 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    font-family: 'Goldman', sans-serif;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+body {
+    background: url('../../assets/img/background5.jpg');
+    background-position:  center;
+    background-repeat: no-repeat;
+    height: 100vh
+}
+
+.ending {
+    max-width: 1240px;
+    margin: 0 auto;
+}
+
+nav {
+    padding: 20px 0;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+nav ul li {
+    display: inline-block;
+    color: #fff;
+}
+
+nav ul li:first-child {
+    font-size: 40px;
+}
+
+nav ul li:last-of-type {
+    float: right;
+    margin-top: 10px;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+main {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+main video {
+    width: 75%;
+    margin: 0 auto;
+}
+
+main button {
+    padding: 15px 20px;
+    cursor: pointer;
+    color: #fff;
+    width: 75%;
+    margin: 0 auto;
+    margin-top: 20px;
+    background-color: #000;
+    font-size: 20px;
+    border: 3px solid #fff;
+}
+
+.ending,
+.win,
+.lose {
+    display: none;
+}

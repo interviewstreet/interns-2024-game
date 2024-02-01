@@ -4,7 +4,7 @@ const constants = {
     width: kbm.width(),
     height: kbm.height(),
     speed: 300,
-    gameDuration: 10,
+    gameDuration: 60,
     spaceshipCollisionCapacity: 5, // Must be a multiple of 5
     bullets: 12,
     startScreenText: "Aliens have started invading the planet Earth and HackerRank is in danger. It's only a matter of time until aliens take over HackerRank's office.",

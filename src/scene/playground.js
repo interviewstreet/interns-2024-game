@@ -3,6 +3,7 @@ import resources from "../utils/resources.js";
 import constants from "../utils/constants.js";
 import Spaceship from "../elements/Spaceship.js";
 import AsteroidBuilder from "../elements/AsteroidBuilder.js";
+import Sound from "../utils/Sound.js";
 
 let isGameOver = false;
 
@@ -47,7 +48,7 @@ function registerAsteroidSpaceshipCollisionEvent(spaceship, asteroidBuilder, met
             spaceship.explode('spaceship');
             asteroidBuilder.deleteAsteroids();
             clearInterval(metricsTimer);
-            kbm.go("lose");
+            showEndingPage("lost");
         }
     });
 }
@@ -154,6 +155,24 @@ function showMetrics(bulletCount, spaceshipHealth, gameCompletionPercentage) {
     });
 }
 
+function showEndingPage(pageType) {
+    document.querySelector("canvas").style.display = "none";
+    const endingSection = document.querySelector(".ending");
+    endingSection.style.display = "block";
+
+    Sound.pauseMusic("backgroundMusic");
+
+    if (pageType === "win") {
+        Sound.playMusic("winMusic");
+        document.querySelector(".win").style.display = "block";
+    } else {
+        Sound.playMusic("loseMusic");
+        document.querySelector(".lose").style.display = "block";
+    }
+
+    kbm.quit();
+}
+
 function playground() {
     setBackground();
     const spaceship = addSpaceship();
@@ -170,7 +189,7 @@ function playground() {
             spaceship.freezeAndCenterSpaceshipaAtGameEnd();
             return showHackerspace();
         })
-        .then(() => kbm.go("win"))
+        .then(() => showEndingPage("win"))
         .catch(e => console.log(e))
 }
 

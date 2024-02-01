@@ -58,7 +58,6 @@ function switchToStoryScreen() {
 }
 
 function skipToPlayground(switchingTimer) {
-    clearInterval(switchingTimer)
     kbm.add([
         kbm.pos(constants.width - 40, constants.height - 40),
         kbm.text("Skip", {
@@ -72,6 +71,7 @@ function skipToPlayground(switchingTimer) {
     ]);
 
     kbm.onClick("skip", () => {
+        clearInterval(switchingTimer)
         kbm.go("playground");
     });
 }

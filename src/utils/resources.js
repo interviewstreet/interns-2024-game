@@ -90,13 +90,13 @@ const resources = {
     bulletAsteroidCollisionMusic: {
         element: kbm.loadSound('bulletAsteroidCollisionMusic', '../assets/sounds/bulletAsteroidCollisionMusic.mp3')
     },
-    bullet: {
+    bulletMusic: {
         element: kbm.loadSound('bulletMusic', '../assets/sounds/bullet.mp3')
     },
-    win: {
+    winMusic: {
         element: kbm.loadSound('winMusic', '../assets/sounds/win.mp3')
     },
-    lose: {
+    loseMusic: {
         element: kbm.loadSound('loseMusic', '../assets/sounds/lose.mp3')
     }
 };
