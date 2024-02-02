@@ -12,7 +12,7 @@ a {
 }
 
 body {
-    background: url('../../assets/img/ending.webp');
+    background: url('https://interns2024.pages.dev/game/img/ending.webp');
     background-position:  center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -57,7 +57,7 @@ body {
 
 @media only screen and (max-width: 1300px) {
     body {
-        background: url('../../assets/img/story.webp');
+        background: url('https://interns2024.pages.dev/game/img/story.webp');
         background-position:  center;
         background-repeat: no-repeat;
         background-size: cover;
