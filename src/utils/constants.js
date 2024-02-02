@@ -25,7 +25,8 @@ const constants = {
             character: 'hari',
             message: "That sounds like a plan, but I'll need someone to assist me in piloting the spaceship.\n Will you help me save HackerRank?"
         },
-    ]
+    ],
+    cdnPath: "https://interns2024.pages.dev/game"
 };
 
 export default constants;

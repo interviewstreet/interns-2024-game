@@ -1,4 +1,5 @@
 import constants from "./constants.js";
+import kbm from "../config/kaboom.js";
 
 function responsiveFactor() {
     if (constants.width >= 1440) {
@@ -16,6 +17,21 @@ function responsiveFactor() {
     }
 }
 
+function loadSpriteBatch(spriteBaseName, number, extension) {
+    let cnt = 1;
+    const sprites = [];
+    while (cnt <= number) {
+        console.log(`${constants.cdnPath}/sprites/${spriteBaseName}${number}.${extension}`);
+        let sprite = {
+            element: kbm.loadSprite(spriteBaseName + cnt, `${constants.cdnPath}/sprites/${spriteBaseName}${cnt}.${extension}`)
+        };
+        sprites.push(sprite);
+        cnt++;
+    }
+    return sprites;
+}
+
 export {
-    responsiveFactor
+    responsiveFactor,
+    loadSpriteBatch,
 };
