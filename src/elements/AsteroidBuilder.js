@@ -1,77 +1,85 @@
-import kbm from "../config/kaboom.js";
-import constants from "../utils/constants.js";
-import resources from "../utils/resources.js";
-import Asteroid from "./Asteroid.js";
+import kbm from '../config/kaboom.js';
+import constants from '../utils/constants.js';
+import resources from '../utils/resources.js';
+import Asteroid from './Asteroid.js';
 
 class AsteroidBuilder {
-    static getAsteroidCharacteristics() {
-        const randomAsteroidId = Math.ceil(kbm.rand(resources.asteroid.images.length));
-        let randomAsteroidScale = Math.random();
-        const randomXCoord = Math.random() * constants.width;
+  static getAsteroidCharacteristics() {
+    const randomAsteroidId = Math.ceil(
+      kbm.rand(resources.asteroid.images.length),
+    );
+    let randomAsteroidScale = Math.random();
+    const randomXCoord = Math.random() * constants.width;
 
-        if (randomAsteroidScale < 0.4) randomAsteroidScale += 0.5;
+    if (randomAsteroidScale < 0.4) randomAsteroidScale += 0.5;
 
-        return {
+    return {
+      randomAsteroidId,
+      randomAsteroidScale,
+      randomXCoord,
+    };
+  }
+
+  constructor(nOfAsteroidsAtATime = 1) {
+    this.activeAsteroids = [];
+
+    const timer = setInterval(
+      () => {
+        let i = nOfAsteroidsAtATime;
+        while (i > 0) {
+          let { randomAsteroidId, randomAsteroidScale, randomXCoord } =
+            AsteroidBuilder.getAsteroidCharacteristics();
+
+          const asteroid = new Asteroid(
             randomAsteroidId,
             randomAsteroidScale,
-            randomXCoord
-        };
-    }
+            randomXCoord,
+          );
+          asteroid.rotate();
 
-    constructor(nOfAsteroidsAtATime = 1) {
-        this.activeAsteroids = [];
+          this.activeAsteroids.push(asteroid);
+          i--;
+        }
+      },
+      kbm.rand(500, 600),
+    );
 
-        const timer = setInterval(() => {
-            let i = nOfAsteroidsAtATime;
-            while (i > 0) {
-                let {
-                    randomAsteroidId,
-                    randomAsteroidScale,
-                    randomXCoord
-                } = AsteroidBuilder.getAsteroidCharacteristics();
-    
-                const asteroid = new Asteroid(randomAsteroidId, randomAsteroidScale, randomXCoord);
-                asteroid.rotate();
+    this.timer = timer;
+  }
 
-                this.activeAsteroids.push(asteroid);
-                i--;
-            }
-        }, kbm.rand(500, 600));
+  get(id) {
+    return this.activeAsteroids.find((a) => a.element.id === id);
+  }
 
-        this.timer = timer;
-    }
+  registerEventListeners() {
+    kbm.onDestroy('asteroid', (asteroid) => {
+      let modified = this.activeAsteroids.filter(
+        (a) => a.element.id != asteroid.id,
+      );
+      this.activeAsteroids = modified;
+    });
+  }
 
-    get(id) {
-        return this.activeAsteroids.find(a => a.element.id === id);
-    }
+  deleteAsteroids() {
+    clearInterval(this.timer);
+    this.activeAsteroids.forEach((asteroid) => {
+      asteroid.element.destroy();
+    });
+  }
 
-    registerEventListeners() {
-        kbm.onDestroy("asteroid", (asteroid) => {
-            let modified = this.activeAsteroids.filter(a => a.element.id != asteroid.id)
-            this.activeAsteroids = modified;
-        });
-    }
+  haveAllAsteroidsFlownOutOfView() {
+    const checkForAsteroidsAtInterval = 100;
 
-    deleteAsteroids() {
-        clearInterval(this.timer);
-        this.activeAsteroids.forEach(asteroid => {
-            asteroid.element.destroy();
-        });
-    }
-
-    haveAllAsteroidsFlownOutOfView() {
-        const checkForAsteroidsAtInterval = 100;
-
-        return new Promise((resolve) => {
-            const checkForAsteroidsTimer = setInterval(() => {
-                let asteroids = kbm.get("asteroid");
-                if (!asteroids.length) {
-                    clearInterval(checkForAsteroidsTimer);
-                    resolve();
-                }
-            }, checkForAsteroidsAtInterval)
-        });
-    }
+    return new Promise((resolve) => {
+      const checkForAsteroidsTimer = setInterval(() => {
+        let asteroids = kbm.get('asteroid');
+        if (!asteroids.length) {
+          clearInterval(checkForAsteroidsTimer);
+          resolve();
+        }
+      }, checkForAsteroidsAtInterval);
+    });
+  }
 }
 
 export default AsteroidBuilder;

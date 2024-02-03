@@ -5,13 +5,15 @@
   "source": "src/index.html",
   "scripts": {
     "start": "parcel",
-    "build": "parcel build --dist-dir dist --public-url ./"
+    "build": "npm run prettify && parcel build --dist-dir dist --public-url ./",
+    "prettify": "prettier . --write"
   },
   "author": "Suyash Purwar",
   "type": "module",
   "license": "ISC",
   "devDependencies": {
-    "parcel": "^2.11.0"
+    "parcel": "^2.11.0",
+    "prettier": "^3.2.4"
   },
   "repository": {
     "type": "git",
