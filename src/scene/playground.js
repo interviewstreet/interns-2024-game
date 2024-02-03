@@ -171,6 +171,27 @@ function showEndingPage(pageType) {
     kbm.quit();
 }
 
+function endGame(metricsTimer, asteroidBuilder) {
+    kbm.add([
+        kbm.pos(constants.width - 40, 40),
+        kbm.text("End Game", {
+            size: 15,
+            font: "BruceForever"
+        }),
+        kbm.anchor("right"),
+        kbm.area(),
+        kbm.z(2),
+        "endGameBtn"
+    ]);
+
+    kbm.onClick("endGameBtn", () => {
+        isGameOver = true;
+        clearInterval(metricsTimer);
+        asteroidBuilder.deleteAsteroids();
+        showEndingPage("lose");
+    });
+}
+
 function playground() {
     setBackground();
     const spaceship = addSpaceship();
@@ -180,6 +201,8 @@ function playground() {
     
     registerAsteroidSpaceshipCollisionEvent(spaceship, asteroidBuilder, metricsTimer);
     registerBulletAsteroidCollisionEvent(spaceship, asteroidBuilder);
+
+    endGame(metricsTimer, asteroidBuilder);
 
     clearIncomingAsteroidsTimer(asteroidBuilder.timer)
         .then(asteroidBuilder.haveAllAsteroidsFlownOutOfView)

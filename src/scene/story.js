@@ -156,7 +156,7 @@ function playButton() {
     let isBtnBoxAligned = false;
     let isBtnTextAligned = false;
 
-    const btn = kbm.add([
+    const playBtn = kbm.add([
         kbm.pos(constants.width / 2, constants.height + 300),
         kbm.rect(280, 90),
         kbm.color(kbm.WHITE),
@@ -164,10 +164,10 @@ function playButton() {
         kbm.outline(10, kbm.BLACK),
         kbm.area(),
         kbm.move(kbm.UP, 300),
-        "btnBox",
+        "playBtnBox",
     ]);
 
-    const btnText = kbm.add([
+    const playBtnText = kbm.add([
         kbm.pos(constants.width / 2, constants.height + 300),
         kbm.text("Help Hari", {
             size: 30,
@@ -176,20 +176,21 @@ function playButton() {
         }),
         kbm.color(kbm.BLACK),
         kbm.anchor("center"),
-        kbm.move(kbm.UP, 300)
+        kbm.move(kbm.UP, 300),
+        "playBtnText"
     ]);
 
-    kbm.onClick("btnBox", () => {
+    kbm.onClick("playBtnBox", () => {
         kbm.go("playground");
     });
 
     const timer = setInterval(() => {
-        if (btn.pos.y < constants.height - 100) {
-            btn.paused = true;
+        if (playBtn.pos.y < constants.height - 100) {
+            playBtn.paused = true;
             isBtnBoxAligned = true;
         }
-        if (btnText.pos.y < constants.height - 103) {
-            btnText.paused = true;
+        if (playBtnText.pos.y < constants.height - 103) {
+            playBtnText.paused = true;
             isBtnTextAligned = true;
         }
 

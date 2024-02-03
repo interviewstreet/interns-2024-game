@@ -62,10 +62,10 @@ function skipToPlayground(switchingTimer) {
         }),
         kbm.area(),
         kbm.anchor("right"),
-        "skip"
+        "skipBtn"
     ]);
 
-    kbm.onClick("skip", () => {
+    kbm.onClick("skipBtn", () => {
         clearInterval(switchingTimer)
         kbm.go("playground");
     });
