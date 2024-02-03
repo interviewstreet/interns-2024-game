@@ -31,15 +31,14 @@ class Asteroid {
         }
 
         let explosionImageCount = 1;
-        const maxExplosionImage = resources.explosion.images.length;
+        const maxExplosionImage = resources.explosion.imagesCount;
         
         const timer = setInterval(() => {
             if (explosionImageCount == 1) this.element.scaleTo(this.element.scale.x + .5, this.element.scale.y + .5);
-            
             this.element.use(kbm.sprite(`explosion${explosionImageCount}`));
             explosionImageCount++;
 
-            if (maxExplosionImage === explosionImageCount) {
+            if (maxExplosionImage <= explosionImageCount) {
                 this.element.destroy();
                 clearTimeout(timer);
             }

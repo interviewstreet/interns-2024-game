@@ -21,7 +21,6 @@ function loadSpriteBatch(spriteBaseName, number, extension) {
     let cnt = 1;
     const sprites = [];
     while (cnt <= number) {
-        console.log(`${constants.cdnPath}/sprites/${spriteBaseName}${number}.${extension}`);
         let sprite = {
             element: kbm.loadSprite(spriteBaseName + cnt, `${constants.cdnPath}/sprites/${spriteBaseName}${cnt}.${extension}`)
         };

@@ -184,7 +184,7 @@ function playground() {
     clearIncomingAsteroidsTimer(asteroidBuilder.timer)
         .then(asteroidBuilder.haveAllAsteroidsFlownOutOfView)
         .then(() => {
-            spaceship.freezeAndCenterSpaceshipaAtGameEnd();
+            spaceship.freezeAndCenterSpaceshipAtGameEnd();
             return showHackerspace();
         })
         .then(() => showEndingPage("win"))

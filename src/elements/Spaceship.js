@@ -142,7 +142,7 @@ class Spaceship {
         }
     }
 
-    freezeAndCenterSpaceshipaAtGameEnd() {
+    freezeAndCenterSpaceshipAtGameEnd() {
         this.controls = false;
         const centerX = constants.width / 2;
         const centerY = constants.height / 2;

@@ -4,7 +4,7 @@ import resources from "../utils/resources.js";
 import Asteroid from "./Asteroid.js";
 
 class AsteroidBuilder {
-    static getAsteroidCharacterstics() {
+    static getAsteroidCharacteristics() {
         const randomAsteroidId = Math.ceil(kbm.rand(resources.asteroid.images.length));
         let randomAsteroidScale = Math.random();
         const randomXCoord = Math.random() * constants.width;
@@ -28,7 +28,7 @@ class AsteroidBuilder {
                     randomAsteroidId,
                     randomAsteroidScale,
                     randomXCoord
-                } = AsteroidBuilder.getAsteroidCharacterstics();
+                } = AsteroidBuilder.getAsteroidCharacteristics();
     
                 const asteroid = new Asteroid(randomAsteroidId, randomAsteroidScale, randomXCoord);
                 asteroid.rotate();
@@ -66,7 +66,7 @@ class AsteroidBuilder {
             const checkForAsteroidsTimer = setInterval(() => {
                 let asteroids = kbm.get("asteroid");
                 if (!asteroids.length) {
-                    clearInterval(checkForAsteroidsAtInterval);
+                    clearInterval(checkForAsteroidsTimer);
                     resolve();
                 }
             }, checkForAsteroidsAtInterval)

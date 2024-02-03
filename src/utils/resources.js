@@ -24,9 +24,11 @@ const resources = {
         height: 141
     },
     asteroid: {
+        imagesCount: 12,
         images: loadSpriteBatch("asteroid", 12, 'png')
     },
     explosion: {
+        imagesCount: 8,
         images: loadSpriteBatch("explosion", 8, 'png')
     },
     hackerspace: {
