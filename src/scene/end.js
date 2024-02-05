@@ -20,15 +20,6 @@ function showEndingPage(pageType) {
   kbm.quit();
 }
 
-// function takeScreenshot() {
-//   const href = document.querySelector('canvas').toDataURL();
-//   console.log(href)
-//   const link = document.createElement("a");
-//   link.href = href;
-//   link.download = "screenshot.png";
-//   link.click();
-// }
-
 export {
   showEndingPage,
 }
