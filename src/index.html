@@ -63,6 +63,8 @@
       property="twitter:image"
       content="https://interns2024.pages.dev/assets/og/game-home.webp"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css" integrity="sha512-8RxmFOVaKQe/xtg6lbscU9DU0IRhURWEuiI0tXevv+lXbAHfkpamD4VKFQRto9WgfOJDwOZ74c/s9Yesv3VvIQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://kit.fontawesome.com/ebfd4f4467.js" crossorigin="anonymous"></script>
     <title>Take interns to HackerSpace</title>
   </head>
   <body>
@@ -84,7 +86,23 @@
             src="https://interns2024.pages.dev/assets/game/videos/lose.mp4"
           />
         </video>
-        <button onclick="window.location.reload()">Try again</button>
+        <div class="button-group">
+          <button onclick="window.location.reload()">Try again</button>
+          <button class="socials" id="socials">
+            <p>Share on socials</p>
+            <div class="social-links">
+              <a href="https://twitter.com/intent/tweet?text=Help%20Hari%20take%20hackerrankers%20to%20HackerSpace&url=hackerrank.com/interns/2024/game" target="blank" title="twitter">
+                <i class="fa-brands fa-twitter"></i>
+              </a>
+              <a href="https://www.linkedin.com/shareArticle?mini=true&url=hackerrank.com/interns/2024/game&title=Help%20Hari%20take%20hackerrankers%20to%20HackerSpace">
+                <i class="fa-brands fa-linkedin"></i>
+              </a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=hackerrank.com/interns/2024/game" target="blank" title="facebook">
+                <i class="fa-brands fa-facebook"></i>
+              </a>
+            </div>
+          </button>
+        </div>
       </main>
     </section>
 

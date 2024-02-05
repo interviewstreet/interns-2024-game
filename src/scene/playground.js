@@ -3,19 +3,9 @@ import resources from '../utils/resources.js';
 import constants from '../utils/constants.js';
 import Spaceship from '../elements/Spaceship.js';
 import AsteroidBuilder from '../elements/AsteroidBuilder.js';
-import Sound from '../utils/Sound.js';
+import { showEndingPage } from './end.js';
 
 let isGameOver = false;
-
-// Function to take a screenshot of the entire page
-const takeScreenshot = () => {
-  const href = document.querySelector('canvas').toDataURL();
-  console.log(href)
-  const link = document.createElement("a");
-  link.href = href;
-  link.download = "screenshot.png";
-  link.click();
-}
 
 function setBackground() {
   let scaleFactor;
@@ -191,27 +181,6 @@ function addEndGameButton(metricsTimer, asteroidBuilder) {
     asteroidBuilder.deleteAsteroids();
     showEndingPage('lose');
   });
-}
-
-function showEndingPage(pageType) {
-
-  
-  // document.querySelector('canvas').style.display = 'none';
-  const endingSection = document.querySelector('.ending');
-  endingSection.style.display = 'block';
-
-
-  Sound.pauseMusic('backgroundMusic');
-
-  if (pageType === 'win') {
-      Sound.playMusic('winMusic');
-      document.querySelector('.win').style.display = 'block';
-  } else {
-      Sound.playMusic('loseMusic');
-      document.querySelector('.lose').style.display = 'block';
-  }
-
-  kbm.quit();
 }
 
 function playground() {
