@@ -151,10 +151,6 @@ function showMetrics(bulletCount, spaceshipHealth, gameCompletionPercentage) {
     }),
   ]);
 
-  if(spaceshipHealth === "DESTROYED") {
-    takeScreenshot();
-  }
-
   kbm.wait(0.55, () => {
     bulletCountText.destroy();
     spaceshipHealthText.destroy();

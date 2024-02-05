@@ -20,5 +20,5 @@ function loadGameScenes() {
 
 (function initiateGame() {
   loadGameScenes();
-  kbm.go('playground');
+  kbm.go('start');
 })();
