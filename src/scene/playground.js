@@ -3,7 +3,7 @@ import resources from '../utils/resources.js';
 import constants from '../utils/constants.js';
 import Spaceship from '../elements/Spaceship.js';
 import AsteroidBuilder from '../elements/AsteroidBuilder.js';
-import Sound from '../utils/Sound.js';
+import { showEndingPage } from './end.js';
 
 let isGameOver = false;
 
@@ -39,21 +39,12 @@ function initiateAsteroidField() {
 function registerAsteroidSpaceshipCollisionEvent(
   spaceship,
   asteroidBuilder,
-  metricsTimer,
 ) {
   kbm.onCollide('spaceship', 'asteroid', (s, a, collision) => {
     kbm.shake();
     let asteroid = asteroidBuilder.get(a.id);
     asteroid.explode('spaceship');
     spaceship.decreaseHealthStatus();
-
-    if (spaceship.healthStatus === 'DESTROYED') {
-      isGameOver = true;
-      spaceship.explode('spaceship');
-      asteroidBuilder.deleteAsteroids();
-      clearInterval(metricsTimer);
-      showEndingPage('lost');
-    }
   });
 }
 
@@ -100,7 +91,7 @@ function showHackerspace() {
   });
 }
 
-function calculateMetrics(spaceship) {
+function calculateMetrics(spaceship, asteroidBuilder) {
   const extraTime = 8;
   const gameLength = constants.gameDuration + extraTime;
 
@@ -117,6 +108,14 @@ function calculateMetrics(spaceship) {
     if (gameCompletionPercentage === 100) clearInterval(metricsTimers);
 
     showMetrics(bulletCount, spaceshipHealth, gameCompletionPercentage);
+
+    if (spaceshipHealth === 'DESTROYED') {    
+      isGameOver = true;
+      spaceship.explode('spaceship');
+      asteroidBuilder.deleteAsteroids();
+      clearInterval(metricsTimers);
+      showEndingPage('lost');
+    }
   }, 500);
 
   return metricsTimers;
@@ -152,6 +151,10 @@ function showMetrics(bulletCount, spaceshipHealth, gameCompletionPercentage) {
     }),
   ]);
 
+  if(spaceshipHealth === "DESTROYED") {
+    takeScreenshot();
+  }
+
   kbm.wait(0.55, () => {
     bulletCountText.destroy();
     spaceshipHealthText.destroy();
@@ -180,36 +183,18 @@ function addEndGameButton(metricsTimer, asteroidBuilder) {
   });
 }
 
-function showEndingPage(pageType) {
-  document.querySelector('canvas').style.display = 'none';
-  const endingSection = document.querySelector('.ending');
-  endingSection.style.display = 'block';
-
-  Sound.pauseMusic('backgroundMusic');
-
-  if (pageType === 'win') {
-      Sound.playMusic('winMusic');
-      document.querySelector('.win').style.display = 'block';
-  } else {
-      Sound.playMusic('loseMusic');
-      document.querySelector('.lose').style.display = 'block';
-  }
-
-  kbm.quit();
-}
-
 function playground() {
   setBackground();
   const spaceship = addSpaceship();
   const asteroidBuilder = initiateAsteroidField();
 
-  const metricsTimer = calculateMetrics(spaceship);
+  const metricsTimer = calculateMetrics(spaceship, asteroidBuilder);
 
   registerAsteroidSpaceshipCollisionEvent(
     spaceship,
     asteroidBuilder,
-    metricsTimer,
   );
+  
   registerBulletAsteroidCollisionEvent(spaceship, asteroidBuilder);
 
   addEndGameButton(metricsTimer, asteroidBuilder);
