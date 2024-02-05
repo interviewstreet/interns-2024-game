@@ -18,8 +18,10 @@ function loadGameScenes() {
   kbm.scene('story', story);
 }
 
-(function initiateGame() {
+function initiateGame() {
   getSoundPermission();
   loadGameScenes();
   kbm.go('start');
-})();
+}
+
+initiateGame();

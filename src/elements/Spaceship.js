@@ -174,11 +174,8 @@ class Spaceship {
 
     const timer = setInterval(() => {
       if (Math.abs(this.element.pos.x - centerX) >= 10) {
-        if (directionToMoveIn.Xaxis) {
-          this.element.pos.x += 10;
-        } else {
-          this.element.pos.x -= 10;
-        }
+        if (directionToMoveIn.Xaxis) this.element.pos.x += 10;
+        else this.element.pos.x -= 10;
       } else {
         isSpaceshipCenteredOnXaxis = true;
       }
@@ -190,8 +187,7 @@ class Spaceship {
         isSpaceshipCenteredOnYaxis = true;
       }
 
-      if (isSpaceshipCenteredOnXaxis && isSpaceshipCenteredOnYaxis)
-        clearInterval(timer);
+      if (isSpaceshipCenteredOnXaxis && isSpaceshipCenteredOnYaxis) clearInterval(timer);
     }, 50);
   }
 }
