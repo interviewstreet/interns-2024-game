@@ -16,7 +16,7 @@ a {
 }
 
 body {
-  background: url('https://interns2024.pages.dev/assets/game/img/ending.webp');
+  background: url('https://cdn.hackerrank.com/interns/2024/assets/game/img/ending.webp');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -166,7 +166,7 @@ main button.socials:hover .social-links {
 
 @media only screen and (max-width: 1300px) {
   body {
-    background: url('https://interns2024.pages.dev/assets/game/img/story.webp');
+    background: url('https://cdn.hackerrank.com/interns/2024/assets/game/img/story.webp');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

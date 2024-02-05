@@ -184,18 +184,14 @@ class Spaceship {
       }
 
       if (Math.abs(this.element.pos.y - centerY) >= 10) {
-        if (directionToMoveIn.Yaxis) {
-          this.element.pos.y += 10;
-        } else {
-          this.element.pos.y -= 10;
-        }
+        if (directionToMoveIn.Yaxis) this.element.pos.y += 10;
+        else this.element.pos.y -= 10;
       } else {
         isSpaceshipCenteredOnYaxis = true;
       }
 
-      if (isSpaceshipCenteredOnXaxis && isSpaceshipCenteredOnYaxis) {
+      if (isSpaceshipCenteredOnXaxis && isSpaceshipCenteredOnYaxis)
         clearInterval(timer);
-      }
     }, 50);
   }
 }

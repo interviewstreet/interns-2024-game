@@ -4,13 +4,13 @@ import start from './scene/start.js';
 import story from './scene/story.js';
 import Sound from './utils/Sound.js';
 
-(function getSoundPermission() {
+function getSoundPermission() {
   let audioContext;
   window.onload = function () {
     audioContext = new AudioContext();
     Sound.enableAudio(audioContext);
   };
-})();
+}
 
 function loadGameScenes() {
   kbm.scene('playground', playground);
@@ -19,6 +19,7 @@ function loadGameScenes() {
 }
 
 (function initiateGame() {
+  getSoundPermission();
   loadGameScenes();
   kbm.go('start');
 })();

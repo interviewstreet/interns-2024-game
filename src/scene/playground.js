@@ -82,6 +82,7 @@ function showHackerspace() {
   return new Promise((resolve) => {
     const planetAnimationTimer = setInterval(() => {
       if (hackerspace.pos.y > constants.height / 2) {
+        hackerspace.paused = true;
         clearInterval(planetAnimationTimer);
         resolve();
       }
