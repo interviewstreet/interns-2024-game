@@ -165,6 +165,10 @@ main button.socials:hover .social-links {
 }
 
 @media only screen and (max-width: 1300px) {
+  .ending {
+    display: none !important;
+  }
+
   body {
     background: url('https://cdn.hackerrank.com/interns/2024/assets/game/img/story.webp');
     background-position: center;
