@@ -1,11 +1,25 @@
 {
   "name": "interns-2024-game",
   "version": "1.0.0",
-  "description": "Maze Game",
-  "main": "index.js",
+  "description": "Interns 2024 Game",
+  "source": "src/index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel",
+    "build": "npm run prettify && parcel build --dist-dir dist --public-url ./",
+    "prettify": "prettier . --write"
   },
-  "author": "Suyash Purwar",
-  "license": "ISC"
+  "type": "module",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.11.0",
+    "prettier": "^3.2.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/interviewstreet/interns-2024-game.git"
+  },
+  "bugs": {
+    "url": "https://github.com/interviewstreet/interns-2024-game/issues"
+  },
+  "homepage": "https://github.com/interviewstreet/interns-2024-game#readme"
 }
