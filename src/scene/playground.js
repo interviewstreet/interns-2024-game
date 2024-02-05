@@ -3,9 +3,10 @@ import resources from '../utils/resources.js';
 import constants from '../utils/constants.js';
 import Spaceship from '../elements/Spaceship.js';
 import AsteroidBuilder from '../elements/AsteroidBuilder.js';
-import { showEndingPage } from './end.js';
+import { showEndingPage, socialMediaHandler } from './end.js';
 
 let isGameOver = false;
+let gameCompletionPercentage;
 
 function setBackground() {
   let scaleFactor;
@@ -36,10 +37,7 @@ function initiateAsteroidField() {
   return asteroidBuilder;
 }
 
-function registerAsteroidSpaceshipCollisionEvent(
-  spaceship,
-  asteroidBuilder,
-) {
+function registerAsteroidSpaceshipCollisionEvent(spaceship, asteroidBuilder) {
   kbm.onCollide('spaceship', 'asteroid', (s, a, collision) => {
     kbm.shake();
     let asteroid = asteroidBuilder.get(a.id);
@@ -101,19 +99,18 @@ function calculateMetrics(spaceship, asteroidBuilder) {
     let bulletCount = spaceship.bullets;
     let spaceshipHealth = spaceship.healthStatus;
 
-    let gameCompletionPercentage = Math.floor(
-      (secondsElapsed / gameLength) * 100,
-    );
+    gameCompletionPercentage = Math.floor((secondsElapsed / gameLength) * 100);
 
     if (gameCompletionPercentage === 100) clearInterval(metricsTimers);
 
-    showMetrics(bulletCount, spaceshipHealth, gameCompletionPercentage);
+    showMetrics(bulletCount, spaceshipHealth);
 
-    if (spaceshipHealth === 'DESTROYED') {    
+    if (spaceshipHealth === 'DESTROYED') {
       isGameOver = true;
       spaceship.explode('spaceship');
       asteroidBuilder.deleteAsteroids();
       clearInterval(metricsTimers);
+      socialMediaHandler(spaceshipHealth, gameCompletionPercentage);
       showEndingPage('lost');
     }
   }, 500);
@@ -121,7 +118,7 @@ function calculateMetrics(spaceship, asteroidBuilder) {
   return metricsTimers;
 }
 
-function showMetrics(bulletCount, spaceshipHealth, gameCompletionPercentage) {
+function showMetrics(bulletCount, spaceshipHealth) {
   const posY = 30;
   const cornerMargin = 30;
   const margin = (constants.width - cornerMargin * 2) / 3;
@@ -158,7 +155,7 @@ function showMetrics(bulletCount, spaceshipHealth, gameCompletionPercentage) {
   });
 }
 
-function addEndGameButton(metricsTimer, asteroidBuilder) {
+function addEndGameButton(metricsTimer, asteroidBuilder, spaceshipHealth) {
   kbm.add([
     kbm.pos(constants.width - 40, 40),
     kbm.text('End Game', {
@@ -175,6 +172,7 @@ function addEndGameButton(metricsTimer, asteroidBuilder) {
     isGameOver = true;
     clearInterval(metricsTimer);
     asteroidBuilder.deleteAsteroids();
+    socialMediaHandler(spaceshipHealth, gameCompletionPercentage);
     showEndingPage('lose');
   });
 }
@@ -186,14 +184,11 @@ function playground() {
 
   const metricsTimer = calculateMetrics(spaceship, asteroidBuilder);
 
-  registerAsteroidSpaceshipCollisionEvent(
-    spaceship,
-    asteroidBuilder,
-  );
-  
+  registerAsteroidSpaceshipCollisionEvent(spaceship, asteroidBuilder);
+
   registerBulletAsteroidCollisionEvent(spaceship, asteroidBuilder);
 
-  addEndGameButton(metricsTimer, asteroidBuilder);
+  addEndGameButton(metricsTimer, asteroidBuilder, spaceship.healthStatus);
 
   clearIncomingAsteroidsTimer(asteroidBuilder.timer)
     .then(asteroidBuilder.haveAllAsteroidsFlownOutOfView)
@@ -201,7 +196,10 @@ function playground() {
       spaceship.freezeAndCenterSpaceshipAtGameEnd();
       return showHackerspace();
     })
-    .then(() => showEndingPage('win'))
+    .then(() => {
+      socialMediaHandler(spaceship.healthStatus, gameCompletionPercentage);
+      showEndingPage('win');
+    })
     .catch((e) => console.log(e));
 }
 

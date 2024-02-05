@@ -20,6 +20,19 @@ function showEndingPage(pageType) {
   kbm.quit();
 }
 
-export {
-  showEndingPage,
+function socialMediaHandler(spaceshipHealth, completionPercentage) {
+  const twitter = document.querySelector('#twitter');
+  let text =
+    'Earth faces an alien invasion, putting HackerRank in jeopardy. Help Hari in taking all HackerRankers to safety in HackerSpace. @sp2hari @hackerrank\n\n';
+
+  if (spaceshipHealth === 'DESTROYED') {
+    text = `My spaceship crashed into asteroids and only ${completionPercentage}% of the journey was completed. Help Hari take HackerRankers to HackerSpace. @sp2hari @hackerrank\n\n`;
+  } else if (completionPercentage === 100) {
+    text = `Hurrah! I successfully navigated through the asteroids, escorting all the HackerRankers safely to HackerSpace. @sp2hari @hackerrank\n\n`;
+  }
+
+  twitter.href += encodeURIComponent(text);
+  console.log(twitter, twitter.href);
 }
+
+export { showEndingPage, socialMediaHandler };

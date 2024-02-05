@@ -5,7 +5,8 @@
   padding: 0;
 }
 
-body, button {
+body,
+button {
   font-family: 'Goldman', sans-serif;
 }
 
@@ -110,7 +111,7 @@ main button {
   background-color: #000;
   font-size: 20px;
   border: 3px solid #fff;
-  transition: .5s all;
+  transition: 0.5s all;
 }
 
 main button:hover {
@@ -127,7 +128,7 @@ main button.socials p {
   left: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
-  transition: .5s all;
+  transition: 0.5s all;
 }
 
 main .social-links {
@@ -135,14 +136,14 @@ main .social-links {
   left: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
-  transition: .5s all;
+  transition: 0.5s all;
   display: flex;
   gap: 40px;
   font-size: 23px;
 }
 
 main .social-links a {
-  transition: .2s all;
+  transition: 0.2s all;
 }
 
 main .social-links a:hover {
