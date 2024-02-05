@@ -32,7 +32,6 @@ function socialMediaHandler(spaceshipHealth, completionPercentage) {
   }
 
   twitter.href += encodeURIComponent(text);
-  console.log(twitter, twitter.href);
 }
 
 export { showEndingPage, socialMediaHandler };
